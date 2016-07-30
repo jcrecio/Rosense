@@ -1,0 +1,222 @@
+Log time: Sat Jul 30 12:06:46 2016
+Robot started at Sat Jul 30 12:06:46 2016Log time: Sat Jul 30 12:06:47 2016
+-
+Sensor  20Pk 2028.25 20C got new info at km 25
+Intensity  : 2280 Veh/h
+Average speed  : 102 km/h
+Density   : 7 %
+Light vehicles  : 94 %
+Log time: Sat Jul 30 12:06:47 2016
+-
+Sensor  20Pk 2028.25 20D got new info at km 25
+Intensity  : 2700 Veh/h
+Average speed  : 102 km/h
+Density   : 5 %
+Light vehicles  : 97 %
+Log time: Sat Jul 30 12:06:47 2016
+Error retrieving data: <class 'IndexError'>Log time: Sat Jul 30 12:06:48 2016
+-
+Sensor  20Pk 2028.25 20D got new info at km 30
+Intensity  : 2700 Veh/h
+Average speed  : 102 km/h
+Density   : 5 %
+Light vehicles  : 97 %
+Log time: Sat Jul 30 12:06:48 2016
+Error retrieving data: <class 'IndexError'>Log time: Sat Jul 30 12:06:48 2016
+Error retrieving data: <class 'IndexError'>Log time: Sat Jul 30 12:06:48 2016
+Error retrieving data: <class 'IndexError'>Log time: Sat Jul 30 12:06:49 2016
+Error retrieving data: <class 'IndexError'>Log time: Sat Jul 30 12:06:49 2016
+-
+Sensor  20Pk 2035.4 20D got new info at km 35
+Intensity  : 1620 Veh/h
+Average speed  : 108 km/h
+Density   : 2 %
+Light vehicles  : 100 %
+Log time: Sat Jul 30 12:06:49 2016
+Error retrieving data: <class 'IndexError'>Log time: Sat Jul 30 12:06:50 2016
+-
+Sensor  20Pk 2052.3 20D got new info at km 52
+Intensity  : 3000 Veh/h
+Average speed  : 92 km/h
+Density   : 5 %
+Light vehicles  : 100 %
+Log time: Sat Jul 30 12:06:50 2016
+Error retrieving data: <class 'IndexError'>Log time: Sat Jul 30 12:06:50 2016
+Error retrieving data: <class 'IndexError'>Log time: Sat Jul 30 12:06:50 2016
+-
+Sensor  20Pk 2057.0 20C got new info at km 52
+Intensity  : 3180 Veh/h
+Average speed  : 105 km/h
+Density   : 4 %
+Light vehicles  : 98 %
+Log time: Sat Jul 30 12:06:50 2016
+-
+Sensor  20Pk 2057.0 20D got new info at km 52
+Intensity  : 3240 Veh/h
+Average speed  : 105 km/h
+Density   : 4 %
+Light vehicles  : 100 %
+Log time: Sat Jul 30 12:06:51 2016
+Error retrieving data: <class 'IndexError'>Log time: Sat Jul 30 12:06:51 2016
+-
+Sensor  20Pk 200.35 20D got new info at km 61
+Intensity  : 2400 Veh/h
+Average speed  : 99 km/h
+Density   : 4 %
+Light vehicles  : 100 %
+Log time: Sat Jul 30 12:06:51 2016
+Error retrieving data: <class 'IndexError'>Log time: Sat Jul 30 12:06:51 2016
+Error retrieving data: <class 'IndexError'>Log time: Sat Jul 30 12:06:51 2016
+-
+Sensor  20Pk 2057.0 20D got new info at km 61
+Intensity  : 3240 Veh/h
+Average speed  : 105 km/h
+Density   : 4 %
+Light vehicles  : 100 %
+Log time: Sat Jul 30 12:06:51 2016
+-
+Sensor  20Pk 2057.0 20C got new info at km 61
+Intensity  : 3180 Veh/h
+Average speed  : 105 km/h
+Density   : 4 %
+Light vehicles  : 98 %
+Log time: Sat Jul 30 12:06:52 2016
+Error retrieving data: <class 'IndexError'>Log time: Sat Jul 30 12:07:22 2016
+-
+Sensor  20Pk 2028.25 20C got new info at km 25
+Intensity  : 2280 Veh/h
+Average speed  : 102 km/h
+Density   : 7 %
+Light vehicles  : 94 %
+Log time: Sat Jul 30 12:07:22 2016
+-
+Sensor  20Pk 2028.25 20D got new info at km 25
+Intensity  : 2700 Veh/h
+Average speed  : 102 km/h
+Density   : 5 %
+Light vehicles  : 97 %
+Log time: Sat Jul 30 12:07:22 2016
+Error retrieving data: <class 'IndexError'>Log time: Sat Jul 30 12:07:23 2016
+-
+Sensor  20Pk 2028.25 20D got new info at km 30
+Intensity  : 2700 Veh/h
+Average speed  : 102 km/h
+Density   : 5 %
+Light vehicles  : 97 %
+Log time: Sat Jul 30 12:07:23 2016
+Error retrieving data: <class 'IndexError'>Log time: Sat Jul 30 12:07:23 2016
+Error retrieving data: <class 'IndexError'>Log time: Sat Jul 30 12:07:23 2016
+Error retrieving data: <class 'IndexError'>Log time: Sat Jul 30 12:07:24 2016
+Error retrieving data: <class 'IndexError'>Log time: Sat Jul 30 12:07:24 2016
+-
+Sensor  20Pk 2035.4 20D got new info at km 35
+Intensity  : 1620 Veh/h
+Average speed  : 108 km/h
+Density   : 2 %
+Light vehicles  : 100 %
+Log time: Sat Jul 30 12:07:24 2016
+Error retrieving data: <class 'IndexError'>Log time: Sat Jul 30 12:07:25 2016
+-
+Sensor  20Pk 2052.3 20D got new info at km 52
+Intensity  : 3000 Veh/h
+Average speed  : 92 km/h
+Density   : 5 %
+Light vehicles  : 100 %
+Log time: Sat Jul 30 12:07:25 2016
+Error retrieving data: <class 'IndexError'>Log time: Sat Jul 30 12:07:26 2016
+Error retrieving data: <class 'IndexError'>Log time: Sat Jul 30 12:07:26 2016
+-
+Sensor  20Pk 2057.0 20C got new info at km 52
+Intensity  : 3180 Veh/h
+Average speed  : 105 km/h
+Density   : 4 %
+Light vehicles  : 98 %
+Log time: Sat Jul 30 12:07:26 2016
+-
+Sensor  20Pk 2057.0 20D got new info at km 52
+Intensity  : 3240 Veh/h
+Average speed  : 105 km/h
+Density   : 4 %
+Light vehicles  : 100 %
+Log time: Sat Jul 30 12:07:26 2016
+Error retrieving data: <class 'IndexError'>Log time: Sat Jul 30 12:07:26 2016
+-
+Sensor  20Pk 200.35 20D got new info at km 61
+Intensity  : 2400 Veh/h
+Average speed  : 99 km/h
+Density   : 4 %
+Light vehicles  : 100 %
+Log time: Sat Jul 30 12:07:27 2016
+Error retrieving data: <class 'IndexError'>Log time: Sat Jul 30 12:07:27 2016
+Error retrieving data: <class 'IndexError'>Log time: Sat Jul 30 12:07:27 2016
+-
+Sensor  20Pk 2057.0 20D got new info at km 61
+Intensity  : 3240 Veh/h
+Average speed  : 105 km/h
+Density   : 4 %
+Light vehicles  : 100 %
+Log time: Sat Jul 30 12:07:27 2016
+-
+Sensor  20Pk 2057.0 20C got new info at km 61
+Intensity  : 3180 Veh/h
+Average speed  : 105 km/h
+Density   : 4 %
+Light vehicles  : 98 %
+Log time: Sat Jul 30 12:07:27 2016
+Error retrieving data: <class 'IndexError'>Log time: Sat Jul 30 12:07:58 2016
+-
+Sensor  20Pk 2028.25 20C got new info at km 25
+Intensity  : 2280 Veh/h
+Average speed  : 102 km/h
+Density   : 7 %
+Light vehicles  : 94 %
+Log time: Sat Jul 30 12:07:58 2016
+-
+Sensor  20Pk 2028.25 20D got new info at km 25
+Intensity  : 2700 Veh/h
+Average speed  : 102 km/h
+Density   : 5 %
+Light vehicles  : 97 %
+Log time: Sat Jul 30 12:07:58 2016
+Error retrieving data: <class 'IndexError'>Log time: Sat Jul 30 12:07:58 2016
+-
+Sensor  20Pk 2028.25 20D got new info at km 30
+Intensity  : 2700 Veh/h
+Average speed  : 102 km/h
+Density   : 5 %
+Light vehicles  : 97 %
+Log time: Sat Jul 30 12:07:58 2016
+Error retrieving data: <class 'IndexError'>Log time: Sat Jul 30 12:07:59 2016
+Error retrieving data: <class 'IndexError'>Log time: Sat Jul 30 12:07:59 2016
+Error retrieving data: <class 'IndexError'>Log time: Sat Jul 30 12:07:59 2016
+Error retrieving data: <class 'IndexError'>Log time: Sat Jul 30 12:08:00 2016
+-
+Sensor  20Pk 2035.4 20D got new info at km 35
+Intensity  : 1620 Veh/h
+Average speed  : 108 km/h
+Density   : 2 %
+Light vehicles  : 100 %
+Log time: Sat Jul 30 12:08:00 2016
+Error retrieving data: <class 'IndexError'>Log time: Sat Jul 30 12:08:01 2016
+-
+Sensor  20Pk 2052.3 20D got new info at km 52
+Intensity  : 3000 Veh/h
+Average speed  : 92 km/h
+Density   : 5 %
+Light vehicles  : 100 %
+Log time: Sat Jul 30 12:08:01 2016
+Error retrieving data: <class 'IndexError'>Log time: Sat Jul 30 12:08:01 2016
+Error retrieving data: <class 'IndexError'>Log time: Sat Jul 30 12:08:01 2016
+-
+Sensor  20Pk 2057.0 20C got new info at km 52
+Intensity  : 3180 Veh/h
+Average speed  : 105 km/h
+Density   : 4 %
+Light vehicles  : 98 %
+Log time: Sat Jul 30 12:08:01 2016
+-
+Sensor  20Pk 2057.0 20D got new info at km 52
+Intensity  : 3240 Veh/h
+Average speed  : 105 km/h
+Density   : 4 %
+Light vehicles  : 100 %

@@ -1,191 +1,76 @@
 """
 @author: Juan Carlos Recio Abad
 @name: Rosense
-@description: Robot for Monitoring Traffic Sensors Road M-40 from DGT Spain Application
+@description: Robot for Monitoring DGT Traffic Information from Road M-40 Spain
 """
-import sys
-import urllib.request
-import re
+
 import time
+import json
+import filemanager
+import httpformatter
+import monitor
 
-INFOCARDGT_URI = 'http://infocar.dgt.es/etraffic/'
-
-class Monitor:
-    def __init__(self, km):
-        self.kilometer = km
-        self.logsensors = dict()
-
-    def getsensorsuri(self):
-        return INFOCARDGT_URI
-
-    def getsensorscontent(self, querystring):
-        url = self.getsensorsuri() + 'Buscador?'
-
-        data = urllib.parse.urlencode(querystring).encode("utf-8")
-        content = urllib.request.urlopen(url + data.decode())
-
-        return content.read()
-    
-    def getsensordetail(self, url):
-        content = urllib.request.urlopen(url)
-        page = content.read()
-
-        return self.applysensorfilters(page)
-    
-    def applysensorfilters(self, content):
-        sensorfilter = '<li(.*?)<span class=\'popEcab\'>Intensidad</span>(.*?)</li>'
-        sensorfilter += '(.*?)<li(.*?)<span class=\'popEcab\'>Velocidad media</span>(.*?)</li>'
-        sensorfilter += '(.*?)<li(.*?)<span class=\'popEcab\'>Ocupaci\xf3n</span>(.*?)</li>'
-        sensorfilter += '(.*?)<li(.*?)<span class=\'popEcab\'>Ligeros</span>(.*?)</li>'
-
-        return re.compile(sensorfilter, re.DOTALL).findall(content.decode())
-
-    def printdetailsensor(self, sensorid, detailsensor):
-        print('____________________________')
-        print('Sensor: M-40 ' + sensorid)
-        try:
-            current_sensor = [detailsensor[0][1], detailsensor[0][4], detailsensor[0][7], detailsensor[0][10]]
-
-            if self.logsensors == {}:
-                is_changed = True
-            else:
-                if self.logsensors.has_key(sensorid):
-                    is_changed = self.informationhaschanged(self.logsensors[sensorid], current_sensor)
-                else:
-                    is_changed = True
-
-            if is_changed:
-                self.logsensor(sensorid, current_sensor)
-                self.logsensors[sensorid] = current_sensor[0] + current_sensor[1] + current_sensor[2] + current_sensor[3]
-
-                print('Sensor info logged into file.')
-                print(self.logsensors[sensorid])
-            else:
-                print('No changes. Checked at ' + time.asctime(time.localtime(time.time())))
-        except:
-            print("Error retrieving data: ", sys.exc_info()[0])
-
-    def getavailablesensors(self, km):
-        fields = {'accion_buscar': 'Buscar',
-                  'Camaras': 'true',
-                  'caracter': 'acontencimiento',
-                  'SensoresMeteorologico': 'true',
-                  'SensoresTrafico': 'true',
-                  'Paneles': 'true',
-                  'IncidenciasOTROS': 'true',
-                  'IncidenciasEVENTOS': 'true',
-                  'IncidenciasRETENCION': 'true',
-                  'IncidenciasOBRAS': 'true',
-                  'IncidenciasMETEOROLOGICA': 'true',
-                  'IncidenciasPUERTOS': 'true',
-                  'lateralDetalles': 'sensores',
-                  'pagina': 'buscador',
-                  'poblacion': '',
-                  'provincia': '28',
-                  'carretera': '55188',
-                  'PK': km,
-                  'version': 'texto'
-                  }
-        filter = 'tipo=SensorTrafico&amp;nombre=M-40(.*?)elemGenCod=(.*?)onclick="JavaScript:window.open\(\'(.*?)\',\'SensTraf'
-        content = self.getsensorscontent(fields)
-
-        return re.compile(filter, re.DOTALL).findall(content.decode())
-    
-    def connectsensors(self, sensors):
-        for sensor in sensors:
-            formattedsensor = self.formatsensor(sensor[2])
-            urisensor = self.getsensorsuri() + formattedsensor
-            detailsensor = self.getsensordetail(urisensor)
-
-            self.printdetailsensor((sensor[0]).replace('%', ' ').replace('&amp;', ''), detailsensor)
-
-    def formatsensor(self, sensor):
-        return sensor.replace('amp;', '')
-
-    def informationhaschanged(self, previousinfo, currentinfo):
-        return not (previousinfo == (currentinfo[0] + currentinfo[1] + currentinfo[2] + currentinfo[3]))
-    
-
-    
-    def logsensor(self, sensorid, sensor):
-        try:
-            f = open("log.txt", "a")
-            f.write('-\n')
-            f.write('Sensor ' + sensorid + ' got new info at km ' + kilometer + ' registered at ' + time.asctime(time.localtime(time.time())) + ' \n')
-            f.write('Intensity ' + sensor[0]+'\n')
-            f.write('Average speed ' + sensor[1]+'\n')
-            f.write('Density ' + sensor[2]+'\n')
-            f.write('Light vehicles ' + sensor[3]+'\n')
-        except:
-            print('Sensor info could not be logged into file.')
+INFO_CAR_DGT_URI = 'http://infocar.dgt.es/etraffic/'
+LOG_FILE = "log.dat"
 
 
-def isnumeric(s):
-    return s.isdigit()
+class Rosense(object):
 
+    __instance = None
 
-def logstartmonitoring():
-    try:
-        f = open("log.txt", "a")
-        f.write('Robot started at '+time.asctime(time.localtime(time.time()))+'\n')
-        f.close()
-    except:
-        print('Sensor info logged into file.')
+    def __new__(cls):
+        if Rosense.__instance is None:
+            Rosense.__instance = object.__new__(cls)
+        return Rosense.__instance
 
+    def __init__(self):
+        self.file_manager = filemanager.FileManager(LOG_FILE)
+        self.http_formatter = httpformatter.HttpFormatter(INFO_CAR_DGT_URI)
 
-def initmessage():
-    print('Robot for Monitoring Traffic Radars Road M-40 from DGT Spain 2013 Application')
-    print('--------------------------------------------------------------------')    
+        self.monitors = list()
 
+    def log_start(self):
+        self.file_manager.log('Robot started at ' + time.asctime(time.localtime(time.time())))
 
-def getkilometer():
-    km = input("What kilometer would you like to monitor?")
-    return km
+    def connect(self, time_loop):
+        while True:
+            for mon in self.monitors:
+                sensors = mon.sensors()
 
+                if sensors:
+                    sensors.pop(0)
 
-def beginconnection(monitors):
-    while 1:
-        for monitor in monitors:
-            print('---------------- Connected to M-40 sensors at km ' + monitor.kilometer + ' ---------------')
+                mon.connect(sensors)
 
-            sensors = monitor.getavailablesensors(monitor.kilometer)
-            if sensors:
-                sensors.pop(0)
+            # Connects to the source every 'time_loop' seconds to get new information
+            time.sleep(float(time_loop))
 
-            monitor.connectsensors(sensors)
+    def add_monitor(self, kilometer):
+        mon = monitor.Monitor(kilometer)
 
-        print('---------------- Next monitoring within ' + timeloop + ' seconds  ---------------')
+        mon.file_manager = self.file_manager
+        mon.http_formatter = self.http_formatter
 
-        time.sleep(float(timeloop))
+        self.monitors.append(mon)
 
+    def add_monitors(self, kilometers):
+        for kilometer in kilometers:
+            self.add_monitor(kilometer)
 
-def startmonitors(monitors, kilometer):
-    kms = kilometer.split(" ")
+    def start(self, kms):
+        self.log_start()
+        self.add_monitors(kms)
+        self.connect(30)
 
-    for km in kms:
-        if isnumeric(km):
-            monitors.append(Monitor(km))
-        else:
-            try:
-                arraykm = km.split("-")
-                maxkm = int(arraykm[1])
+    # Gets the last logged information of the sensors on the given kilometers
+    def sensors(self):
+        sensors_print = dict()
 
-                i = int(arraykm[0])
-                while i < maxkm:
-                    if isnumeric(i):
-                        monitors.append(Monitor(str(i)))
-                    i += 1
-            except:
-                print(km + ' is not a valid kilometer or interval.')
-    beginconnection(monitors)
+        for mon in self.monitors:
+            sensors_list = mon.log_sensors
+            if sensors_list:
+                sensors_print[mon.kilometer] = sensors_list
 
+        content = json.dumps(sensors_print)
+        return content
 
-def gettimeloop():
-    return input("Interval of time (seconds) to request for information: ")
-
-initmessage()
-logstartmonitoring()
-kilometer = getkilometer()
-timeloop = gettimeloop()
-monitors = list()
-startmonitors(monitors, kilometer)
