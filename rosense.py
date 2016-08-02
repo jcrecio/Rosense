@@ -67,7 +67,7 @@ class Rosense(object):
         sensors_print = dict()
 
         for mon in self.monitors:
-            sensors_list = mon.log_sensors
+            sensors_list = mon.get_sensors()
             if sensors_list:
                 sensors_print[mon.kilometer] = sensors_list
 

@@ -101,8 +101,5 @@ class Monitor:
 
         self.file_manager.log(traces)
 
-    def get_sensor_json(self, sensor_id):
-        if sensor_id in self.log_sensors:
-            return self.log_sensors[sensor_id]
-
-        return None
+    def get_sensors(self):
+        return self.log_sensors

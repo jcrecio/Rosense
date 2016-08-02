@@ -6,13 +6,16 @@ app = Bottle()
 ro = rosense.Rosense()
 
 
+# GET /sensors
 @app.route('/sensors')
 def get_sensors():
+
     sensors = ro.sensors()
     return sensors
 
 
-@app.post('/start')
+# POST /rosense/start, from body: kilometers
+@app.post('/rosense/start')
 def start_monitors():
     t = threading.Thread(target=ro.start, args=([request.json['kilometers']]))
     t.start()
