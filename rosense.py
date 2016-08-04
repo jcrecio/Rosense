@@ -34,16 +34,19 @@ class Rosense(object):
 
     def connect(self, time_loop):
         while True:
-            for mon in self.monitors:
-                sensors = mon.sensors()
-
-                if sensors:
-                    sensors.pop(0)
-
-                mon.connect(sensors)
+            self.connect_monitors()
 
             # Connects to the source every 'time_loop' seconds to get new information
             time.sleep(float(time_loop))
+
+    def connect_monitors(self):
+        for mon in self.monitors:
+            sensors = mon.sensors()
+
+        if sensors:
+            sensors.pop(0)
+
+        mon.connect(sensors) # TODO: Code smell, monitor extracts sensors and pass them in itself!?
 
     def add_monitor(self, kilometer):
         mon = monitor.Monitor(kilometer)
