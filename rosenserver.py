@@ -17,7 +17,8 @@ def get_sensors():
 # POST /rosense/start, from body: kilometers
 @app.post('/rosense/start')
 def start_monitors():
-    t = threading.Thread(target=ro.start, args=([request.json['kilometers']]))
+    params = request.json['kilometers']
+    t = threading.Thread(target=ro.start, args=([params]))
     t.start()
 
     return "Rosense started"

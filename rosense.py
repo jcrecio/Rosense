@@ -7,14 +7,24 @@
 import time
 import json
 import filemanager
-import httpformatter
+import httpservice
 import monitor
+import settings
+from filter import Filter
 
 INFO_CAR_DGT_URI = 'http://infocar.dgt.es/etraffic/'
 LOG_FILE = "log.dat"
 
 
 class Rosense(object):
+    FILTERS = {settings.FILTER_SENSOR_DETAIL:
+                   Filter('<li(.*?)<span class=\'popEcab\'>Intensidad</span>(.*?)</li>(.*?)<li(.*?)' \
+                          '<span class=\'popEcab\'>Velocidad media</span>(.*?)</li>(.*?)<li(.*?)<span ' \
+                          'class=\'popEcab\'>Ocupaci\xf3n</span>(.*?)</li>(.*?)<li(.*?)<span class=\'pop' \
+                          'Ecab\'>Ligeros</span>(.*?)</li>'),
+               settings.FILTER_SENSOR_OPTION:
+                   Filter('tipo=SensorTrafico&amp;nombre=M-40(.*?)elemGenCod=(.*?)onclick="JavaScript:' \
+                          'window.open\(\'(.*?)\',\'SensTraf')}
 
     __instance = None
 
@@ -25,7 +35,7 @@ class Rosense(object):
 
     def __init__(self):
         self.file_manager = filemanager.FileManager(LOG_FILE)
-        self.http_formatter = httpformatter.HttpFormatter(INFO_CAR_DGT_URI)
+        self.http_formatter = httpservice.HttpService(INFO_CAR_DGT_URI)
 
         self.monitors = list()
 
@@ -46,10 +56,10 @@ class Rosense(object):
         if sensors:
             sensors.pop(0)
 
-        mon.connect(sensors) # TODO: Code smell, monitor extracts sensors and pass them in itself!?
+        mon.connect(sensors)  # TODO: Code smell, monitor extracts sensors and pass them in itself!?
 
     def add_monitor(self, kilometer):
-        mon = monitor.Monitor(kilometer)
+        mon = monitor.Monitor(kilometer, Rosense.FILTERS)
 
         mon.file_manager = self.file_manager
         mon.http_formatter = self.http_formatter
@@ -76,4 +86,3 @@ class Rosense(object):
 
         content = json.dumps(sensors_print)
         return content
-

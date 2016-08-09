@@ -1,30 +1,24 @@
 import sys
 import time
-import re
+import settings
 
 
 class Monitor:
-    SENSOR_DETAIL = '<li(.*?)<span class=\'popEcab\'>Intensidad</span>(.*?)</li>(.*?)<li(.*?)' \
-                    '<span class=\'popEcab\'>Velocidad media</span>(.*?)</li>(.*?)<li(.*?)<span ' \
-                    'class=\'popEcab\'>Ocupaci\xf3n</span>(.*?)</li>(.*?)<li(.*?)<span class=\'pop' \
-                    'Ecab\'>Ligeros</span>(.*?)</li>'
 
-    SENSOR_OPTION = 'tipo=SensorTrafico&amp;nombre=M-40(.*?)elemGenCod=(.*?)onclick="JavaScript:' \
-                    'window.open\(\'(.*?)\',\'SensTraf'
-
-    def __init__(self, km):
+    def __init__(self, km, filters):
         self.kilometer = km
-        self.log_sensors = dict()
-
+        self.filters = filters
         self.file_manager = None
         self.http_formatter = None
+
+        self.log_sensors = dict()
 
     def get_sensor(self, url):
         page = self.http_formatter.get(url)
         return self.apply_filters(page)
 
     def apply_filters(self, content):
-        return re.compile(Monitor.SENSOR_DETAIL, re.DOTALL).findall(content.decode())
+        return self.filters[settings.FILTER_SENSOR_DETAIL].apply(content)
 
     def log_detail_sensor(self, sid, detail):
         try:
@@ -63,7 +57,7 @@ class Monitor:
 
         content = self.http_formatter.request(fields)
 
-        return re.compile(Monitor.SENSOR_OPTION, re.DOTALL).findall(content.decode())
+        return self.filters[settings.FILTER_SENSOR_OPTION].apply(content)
 
     def connect(self, sensors):
         for sensor in sensors:

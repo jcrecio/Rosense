@@ -1,7 +1,7 @@
 from urllib import parse, request
 
 
-class HttpFormatter:
+class HttpService:
     def __init__(self, domain):
         self.domain = domain
 

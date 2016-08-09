@@ -28,7 +28,7 @@ class RosenseTests(unittest.TestCase):
 
     @patch.object(Monitor, 'get_sensors', mock_kilometer1_sensors)
     def test_get_latest_information_kilometer1_sensor(self):
-        self.robot.monitors.append(Monitor(1))
+        self.robot.monitors.append(Monitor(1, []))
         sensors = self.robot.sensors()
 
         self.assertEqual(sensors, '{"1": ["data1", "data2"]}')
